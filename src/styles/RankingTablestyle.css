@@ -1,0 +1,31 @@
+#ranking-table *{
+    color:#ffffff;
+    font-size: 18px;
+
+}
+
+#ranking-table {
+    background-color: #091D28;
+
+    border-radius: 15px;
+    margin: 10px;
+    width: 60%;
+    height: 400px;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+    min-width: 350px;
+    margin-bottom: 20px;
+}
+
+#ranking-table .MuiButtonBase-root {
+    padding: 0%;
+}
+
+@media screen and (max-width:600px){
+    #ranking-table {
+        width: 100%;
+        
+    }
+}

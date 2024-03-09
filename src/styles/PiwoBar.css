@@ -1,0 +1,19 @@
+#piwo {
+    background-image: url("../assets/piwo.png");
+    height:275px;
+    width:275px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin:0 auto;
+    margin-bottom: 30px;
+
+    background-position: 50%;
+    text-align: center;
+    color: white;
+
+}
+
+#piwo-bar-img {
+    width: 100px;
+    margin-top: 40%;
+}
