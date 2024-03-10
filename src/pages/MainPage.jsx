@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { DarkButton } from "../Components/DarkButton";
 import Header from "../Components/Header";
 import Logo from "../Components/Logo";
@@ -8,6 +9,8 @@ import { StyledEngineProvider } from "@mui/material";
 
 
 function MainPage(){
+    const navigate = useNavigate();
+
     return(
         <>
             <Header/>
@@ -16,9 +19,9 @@ function MainPage(){
             </div>
             <br />
             <div id="main-page-buttons" >
-                <DarkButton id="start-adv-button">Zacznij przygodę!</DarkButton>
-                <DarkButton>Odwiedzone bary</DarkButton>
-                <DarkButton>Ranking maratonu</DarkButton>
+                <DarkButton onClick={()=>{navigate("/alkoholizacja")}} id="start-adv-button">Zacznij przygodę!</DarkButton>
+                <DarkButton onClick={()=>{navigate("/odwiedzone-bary")}}>Odwiedzone bary</DarkButton>
+                <DarkButton onClick={()=>{navigate("/ranking")}}>Ranking maratonu</DarkButton>
             </div>
         </>
     );

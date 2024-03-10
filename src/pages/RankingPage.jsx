@@ -5,8 +5,11 @@ import RankingTable from "../Components/RankingTable";
 import "../styles/RankingPagestyle.css";
 import { Button } from '@mui/material';
 import { DarkButton } from '../Components/DarkButton';
+import { useNavigate } from 'react-router-dom';
 
 function RankingPage() {
+    const navigate = useNavigate();
+
   return (
         <>
             <Header/>
@@ -15,7 +18,7 @@ function RankingPage() {
             </div>
             <RankingTable/>
             <div className='center'>
-                <DarkButton>Powrót</DarkButton>
+                <DarkButton onClick={()=>{navigate("/main")}}>Powrót</DarkButton>
             </div>
         </>
     );
