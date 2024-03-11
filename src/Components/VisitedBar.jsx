@@ -1,9 +1,19 @@
 import React from 'react'
-import '../styles/Visitedbarstyle.css'
+import '../styles/VisitedBarstyle.css'
+import { useNavigate } from 'react-router-dom';
 
-function VisitedBar() {
+function VisitedBar(props) {
+
+  const navigate = useNavigate();
+
+
   return (
-    <div>VisitedBar</div>
+    <div id ="visited-bar" onClick={()=>navigate("bary/1")}>
+      <p className="bar-name">{props.barName}</p>
+      <p className="bar-date">{props.date}</p>
+      <img src={props.barImg}/>
+
+    </div>
   )
 }
 
