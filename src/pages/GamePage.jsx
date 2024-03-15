@@ -5,6 +5,9 @@ import Header from '../Components/Header'
 import Logo from '../Components/Logo'
 import PiwoBar from '../Components/PiwoBar';
 import { DarkButton } from '../Components/DarkButton';
+import Timer from '../Components/Timer';
+import '../styles/Background.css';
+
 
 
 function GamePage() {
@@ -14,8 +17,8 @@ function GamePage() {
         )
     }
     return (
-        <>
-            <Header></Header>
+        <div className="background">
+            <Header />
             <div className='small-logo-container'>
                 <Logo/>
             </div>
@@ -23,8 +26,10 @@ function GamePage() {
             <div class="center">
                 <DarkButton>Powrót</DarkButton>
             </div>
-        </>
+            <div className="timer">
+                <Timer duration={30*60*1000} />
+            </div>
+        </div>
     )
 }
-
 export default GamePage
