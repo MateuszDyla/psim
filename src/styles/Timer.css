@@ -4,7 +4,7 @@
     font-size: 70px;
     color: #f0c24c;
     text-align: center;
-    position: fixed;
+    position: absolute;
     bottom: 25%;
     left: 50%;
     transform: translateX(-50%);

@@ -28,7 +28,11 @@
     }
 }
 
-.center {
-    display: flex;
-    justify-content: center;
+
+
+.bottom {
+    bottom: 5%;
+    position: absolute;
+    text-align: center;
+    width: 100%
 }
