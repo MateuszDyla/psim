@@ -12,6 +12,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import VisitedBarsPage from './pages/VisitedBarsPage.jsx'
+import BarDetailsPage from './pages/BarDetailsPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "odwiedzone-bary",
     element: <VisitedBarsPage/>
+  },
+  {
+    path: "bary",
+    element: <BarDetailsPage/>
   }
 
 ]);

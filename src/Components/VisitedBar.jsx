@@ -8,7 +8,7 @@ function VisitedBar(props) {
 
 
   return (
-    <div id ="visited-bar" onClick={()=>navigate("bary/1")}>
+    <div id ="visited-bar" onClick={()=>navigate("/bary?id=1")}>
       <p className="bar-name">{props.barName}</p>
       <p className="bar-date">{props.date}</p>
       <img src={props.barImg}/>
