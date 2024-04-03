@@ -1,6 +1,10 @@
+//Author: Marta Boryczka
+
 import React, { useState, useEffect } from "react";
 import '../styles/Timer.css'
 
+
+//Countdown timer visible in the game
 const Timer = ({duration}) => {
     const [time, setTime] = useState(duration);
 

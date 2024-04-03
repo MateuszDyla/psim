@@ -1,3 +1,5 @@
+//Author: Marta Boryczka, Mateusz Dyla
+
 const width = window.innerWidth
 
 import React from 'react'

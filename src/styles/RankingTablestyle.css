@@ -1,7 +1,6 @@
 #ranking-table *{
     color:#ffffff;
-    font-size: 18px;
-
+    font-size: 16px;
 }
 
 #ranking-table {
@@ -23,7 +22,7 @@
     padding: 0%;
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-width:800px){
     #ranking-table {
         width: 100%;
         

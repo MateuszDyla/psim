@@ -1,8 +1,11 @@
+//Author: Mateusz Dyla
+
 import { Component } from "react";
 import "../styles/Headerstyle.css";
 import { Button } from "@mui/material";
 import { DarkButton } from "./DarkButton";
 
+//Logout bar
 class Header extends Component {
     render() {
         return(

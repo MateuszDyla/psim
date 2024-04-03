@@ -1,8 +1,11 @@
+//Author: Mateusz Dyla
 import React from 'react'
 import '../styles/VisitedBarstyle.css'
 import { useNavigate } from 'react-router-dom';
 
-function VisitedBar(props) {
+
+//"Tile" with the name and image of the bar, and the last visit date.
+function VisitedBarRectangle(props) {
 
   const navigate = useNavigate();
 
@@ -17,4 +20,4 @@ function VisitedBar(props) {
   )
 }
 
-export default VisitedBar
+export default VisitedBarRectangle

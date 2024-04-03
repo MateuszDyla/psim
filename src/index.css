@@ -29,7 +29,7 @@
 
 .logo-container {
   width: 90%;
-  max-width: 500px;
+  max-width: 450px;
   align-self  : center;
   text-align: center;
   margin: auto auto;
@@ -38,7 +38,7 @@
 
 .small-logo-container {
   width: 40%;
-  max-width: 400px;
+  max-width: 350px;
   align-self  : center;
   text-align: center;
   margin: auto auto;

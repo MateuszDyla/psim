@@ -1,6 +1,10 @@
+//Author: Mateusz Dyla
+
 import React from 'react'
 import "../styles/PiwoBar.css"
 
+
+//
 function PiwoBar(props){
   return (
         <>

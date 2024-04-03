@@ -1,9 +1,11 @@
+//Author: Mateusz Dyla
+
 import React from 'react'
 import Header from '../Components/Header'
 import Logo from '../Components/Logo'
 import { DarkButton } from '../Components/DarkButton'
 import { useNavigate } from 'react-router-dom';
-import VisitedBar from '../Components/VisitedBar';
+import VisitedBarRectangle from '../Components/VisitedBarRectangle';
 import "../styles/VisitedBarsPage.css"
 
 function VisitedBarsPage() {
@@ -18,9 +20,9 @@ function VisitedBarsPage() {
             </div>
 
             <div id ="visited-bars-placeholder">
-                <VisitedBar barImg= {"../src/assets/cybermachina.png" } barName="cybermachina" date="24.02.2022"/>
-                <VisitedBar/>
-                <VisitedBar/>
+                <VisitedBarRectangle barImg= {"../src/assets/cybermachina.png" } barName="cybermachina" date="24.02.2022"/>
+                <VisitedBarRectangle barImg= {"../src/assets/remont.png" } barName="remont" date="24.02.2022"/>
+                <VisitedBarRectangle barImg= {"../src/assets/piatak.png" } barName="piątak" date="24.02.2022"/>
             </div>
 
             <div className='center'>

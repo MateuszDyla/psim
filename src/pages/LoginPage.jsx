@@ -1,3 +1,5 @@
+//Author: Mateusz Dyla
+
 import { DarkButton } from "../Components/DarkButton.jsx";
 import Header from "../Components/Header.jsx"
 import Logo from "../Components/Logo.jsx";
@@ -8,7 +10,6 @@ import { Button } from "@mui/material";
 function LoginPage() {
   return(
     <>
-        <Header/>
         <div className ="logo-container">
             <Logo/>
         </div>
