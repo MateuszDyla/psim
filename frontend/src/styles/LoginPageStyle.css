@@ -1,0 +1,28 @@
+#loginForm {
+    text-align: center;
+}
+
+#loginForm input {
+    background: #FFF;
+    width: 20vw;
+    height:30px;
+    color: black;
+    padding-left: 10px;
+}
+
+#loginForm * {
+    margin-top: 30px;
+
+}
+
+#loginForm input#text{
+    width: 30%;
+}
+
+
+
+@media screen and (max-width: 500px) {
+    #loginForm input {
+        width: 70vw;
+    }
+}
