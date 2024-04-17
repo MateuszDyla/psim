@@ -4,8 +4,7 @@ import React from 'react'
 import Header from '../Components/Header';
 import Logo from '../Components/Logo';
 import RankingTable from "../Components/RankingTable";
-import "../styles/RankingPagestyle.css";
-import { Button } from '@mui/material';
+import "../styles/RankingPageStyle.css";
 import { DarkButton } from '../Components/DarkButton';
 import { useNavigate } from 'react-router-dom';
 

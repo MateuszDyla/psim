@@ -3,7 +3,7 @@
 import { DarkButton } from "../Components/DarkButton.jsx";
 import Header from "../Components/Header.jsx"
 import Logo from "../Components/Logo.jsx";
-import '../styles/LoginPagestyle.css'
+import '../styles/LoginPageStyle.css'
 import { Button } from "@mui/material";
 
 

@@ -1,7 +1,7 @@
 //Author: Mateusz Dyla
 
 import React from 'react'
-import "../styles/BarDetailsPagestyle.css"
+import "../styles/BarDetailsPageStyle.css"
 import Header from '../Components/Header'
 import Logo from '../Components/Logo'
 

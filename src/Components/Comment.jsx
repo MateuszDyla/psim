@@ -1,11 +1,11 @@
 //Author: Mateusz Dyla
 
-import "../styles/CommentRectanglestyle.css"
+import "../styles/CommentRectangleStyle.css"
 
 function CommentRectangle(props) {
     return(
         <>
-            <div class="comment-rect">
+            <div className="comment-rect">
 
             </div>
         </>

@@ -1,7 +1,7 @@
 //Author: Marta Boryczka
 
 import React, { useState, useEffect } from "react";
-import '../styles/Timer.css'
+import '../styles/TimerStyle.css'
 
 
 //Countdown timer visible in the game

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import logo from "../assets/logo.png";
-import "../styles/Logostyle.css"
+import "../styles/LogoStyle.css"
 
 //Logo visible at the top of the page
 function Logo() {

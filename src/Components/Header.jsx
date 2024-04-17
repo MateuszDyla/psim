@@ -1,8 +1,7 @@
 //Author: Mateusz Dyla
 
 import { Component } from "react";
-import "../styles/Headerstyle.css";
-import { Button } from "@mui/material";
+import "../styles/HeaderStyle.css";
 import { DarkButton } from "./DarkButton";
 
 //Logout bar

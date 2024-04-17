@@ -1,6 +1,6 @@
 //Author: Mateusz Dyla
 import React from 'react'
-import '../styles/VisitedBarstyle.css'
+import '../styles/VisitedBarStyle.css'
 import { useNavigate } from 'react-router-dom';
 
 

@@ -6,7 +6,7 @@ import Logo from '../Components/Logo'
 import { DarkButton } from '../Components/DarkButton'
 import { useNavigate } from 'react-router-dom';
 import VisitedBarRectangle from '../Components/VisitedBarRectangle';
-import "../styles/VisitedBarsPage.css"
+import "../styles/VisitedBarsPageStyle.css"
 
 function VisitedBarsPage() {
     const navigate = useNavigate();

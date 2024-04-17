@@ -5,10 +5,10 @@ const width = window.innerWidth
 import React from 'react'
 import Header from '../Components/Header'
 import Logo from '../Components/Logo'
-import PiwoBar from '../Components/PiwoBar';
+import CurrentGameBar from '../Components/CurrentGameBar';
 import { DarkButton } from '../Components/DarkButton';
 import Timer from '../Components/Timer';
-import '../styles/GamePagestyle.css';
+import '../styles/GamePageStyle.css';
 
 
 
@@ -24,12 +24,12 @@ function GamePage() {
             <div className='small-logo-container'>
                 <Logo/>
             </div>
-            <PiwoBar img="https://travel-mates.pl/wp-content/uploads/2022/11/Cybermachina0-1080x1080.jpg" barName="Cybermachina" barDesc="Wrocławska 15"/>
+            <CurrentGameBar img="https://travel-mates.pl/wp-content/uploads/2022/11/Cybermachina0-1080x1080.jpg" barName="Cybermachina" barDesc="Wrocławska 15"/>
 
             <div className="timer">
                 <Timer duration={30*60*1000} />
             </div>
-            <div class="bottom">
+            <div className="bottom">
                 <DarkButton>Powrót</DarkButton>
             </div>
         </div>

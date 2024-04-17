@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { DarkButton } from "../Components/DarkButton";
 import Header from "../Components/Header";
 import Logo from "../Components/Logo";
-import "../styles/MainPagestyle.css"
+import "../styles/MainPageStyle.css"
 import { Button } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material";
 
