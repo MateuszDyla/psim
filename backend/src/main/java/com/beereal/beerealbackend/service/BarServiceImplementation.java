@@ -1,0 +1,7 @@
+package com.beereal.beerealbackend.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class BarServiceImplementation implements BarService{
+}
