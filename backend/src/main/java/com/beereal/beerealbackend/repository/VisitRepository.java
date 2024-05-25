@@ -2,8 +2,10 @@ package com.beereal.beerealbackend.repository;
 
 import com.beereal.beerealbackend.model.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
 public interface VisitRepository extends JpaRepository<Visit, Integer> {
+    List<Visit> findByUserId(int userId);
+    List<Visit> findByBarIdAndUserId(int userId, int barId);
 }

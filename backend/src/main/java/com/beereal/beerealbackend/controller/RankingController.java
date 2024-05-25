@@ -1,5 +1,6 @@
 package com.beereal.beerealbackend.controller;
 
+import com.beereal.beerealbackend.JSONresponse.RankingResponse;
 import com.beereal.beerealbackend.dto.RankingEntryDTO;
 import com.beereal.beerealbackend.model.RankingEntry;
 import com.beereal.beerealbackend.model.User;
@@ -21,8 +22,8 @@ public class RankingController {
     UserService userService;
 
     @GetMapping("/show")
-    public ResponseEntity<List<RankingEntry>> getRanking() {
-        List<RankingEntry> list = rankingService.getRanking();
+    public ResponseEntity<List<RankingResponse>> getRanking() {
+        List<RankingResponse> list = rankingService.getRanking();
         return ResponseEntity.ok(list);
     }
 

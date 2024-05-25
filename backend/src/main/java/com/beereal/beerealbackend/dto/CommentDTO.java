@@ -1,15 +1,16 @@
 package com.beereal.beerealbackend.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class CommentDTO {
 
     private int userID;
     private int barID;
-    private Timestamp date;
+    private LocalDateTime date;
     private String text;
 
-    public CommentDTO(int userID, int barID, Timestamp date, String text) {
+    public CommentDTO(int userID, int barID, LocalDateTime date, String text) {
         this.userID = userID;
         this.barID = barID;
         this.date = date;
@@ -32,11 +33,11 @@ public class CommentDTO {
         this.barID = barID;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

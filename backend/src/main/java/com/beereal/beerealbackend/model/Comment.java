@@ -3,6 +3,7 @@ package com.beereal.beerealbackend.model;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class Comment {
@@ -17,11 +18,11 @@ public class Comment {
     @JoinColumn(nullable = false, name= "bar_id")
     private Bar bar;
     @Column(nullable = false)
-    private Timestamp date;
+    private LocalDateTime date;
     @Column(nullable = false)
     private String text;
 
-    public Comment(User user, Bar bar, Timestamp date, String text) {
+    public Comment(User user, Bar bar, LocalDateTime date, String text) {
         this.user = user;
         this.bar = bar;
         this.date = date;
@@ -56,11 +57,11 @@ public class Comment {
         this.bar = bar;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

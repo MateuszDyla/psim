@@ -1,14 +1,15 @@
 package com.beereal.beerealbackend.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class VisitDTO {
 
     private int userID;
     private int barID;
-    private Timestamp date;
+    private LocalDateTime date;
 
-    public VisitDTO(int userID, int barID, Timestamp date) {
+    public VisitDTO(int userID, int barID, LocalDateTime date) {
         this.userID = userID;
         this.barID = barID;
         this.date = date;
@@ -30,11 +31,11 @@ public class VisitDTO {
         this.barID = barID;
     }
 
-    public Timestamp getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

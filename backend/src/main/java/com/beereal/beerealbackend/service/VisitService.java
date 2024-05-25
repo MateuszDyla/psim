@@ -1,8 +1,13 @@
 package com.beereal.beerealbackend.service;
 
-import org.springframework.stereotype.Service;
+import com.beereal.beerealbackend.model.Bar;
+import com.beereal.beerealbackend.model.Visit;
 
-@Service
+import java.util.List;
 
 public interface VisitService {
+    Visit addVisit(Visit visit);
+    List<Bar> getUnlockedBarsByUserId(int userId);
+
+    int countVisitsByUser(int barId, int userId);
 }
