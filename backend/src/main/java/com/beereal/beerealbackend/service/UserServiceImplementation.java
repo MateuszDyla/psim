@@ -3,6 +3,8 @@ package com.beereal.beerealbackend.service;
 import com.beereal.beerealbackend.model.User;
 import com.beereal.beerealbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,12 @@ public class UserServiceImplementation implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public User registerUser(User user) {
+        String encodedPass = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPass);
         return userRepository.save(user);
     }
 
@@ -26,9 +32,14 @@ public class UserServiceImplementation implements UserService{
         return userOptional.orElse(null);
     }
     @Override
-    public User authenticateUser(String username, String password) {
-        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, password);
-        return userOptional.orElse(null);
+    public boolean authenticateUser(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if (!userOptional.isPresent())
+            return false;
+        User user = userOptional.get();
+        if (passwordEncoder.matches(password, user.getPassword()))
+            return true;
+        else return false;
     }
 
     @Override

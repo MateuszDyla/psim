@@ -4,10 +4,8 @@ import com.beereal.beerealbackend.model.User;
 import com.beereal.beerealbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
 
@@ -21,21 +19,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @PostMapping("/register")
     public String register (@RequestBody User user) {
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         userService.registerUser(user);
         return "Student added";
     }
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
-        User authenticatedUser = userService.authenticateUser(user.getUsername(), user.getPassword());
-        if (authenticatedUser != null) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "Login successful");
-            response.put("userId", authenticatedUser.getId());
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+      if (userService.authenticateUser(username, password))
+            return ResponseEntity.ok("User authenticated");
+      else return ResponseEntity.status(401).body("Not authenticated");
     }
 }
