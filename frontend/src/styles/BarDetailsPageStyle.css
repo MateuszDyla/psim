@@ -1,9 +1,65 @@
-
-
 #bar-details {
-    margin:0 auto;
-    background-color: #091D28;
+  margin: 0 auto;
+  background-color: #091d28;
+  width: 80%;
+  max-height: fit-content;
+  text-align: center;
+  overflow: hidden; /* add this to contain floated elements */
+  padding: 10px;
+}
+
+#bar-details-image {
+  width: 20%;
+  float: left;
+  height: 100%;
+  display: block; /* remove extra spacing */
+  position: relative;
+}
+
+#bar-details-text {
+  width: 80%;
+  height: 100%;
+  position: relative;
+  text-align: left;
+  float: left; /* add this to make it fit next to the image */
+  color: white;
+  padding-left: 20px;
+}
+
+#bar-details-image img {
+  width: 100%;
+  height: 100%; /* maintain aspect ratio */
+}
+
+#bar-details-text p {
+  color: white;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#bar-details-text .bar-name-profile {
+  font-weight: 800;
+  letter-spacing: 10px;
+  font-size: 30px;
+}
+#bar-details-text .bar-address-profile {
+  font-weight: 600;
+  letter-spacing: 5px;
+}
+
+@media only screen and (max-width: 400px) {
+  #bar-details-image {
+    width: 100%;
+  }
+  #bar-details-image img {
     width: 80%;
-    min-height: 200px;
-    border-radius: 15px;
+  }
+
+  #bar-details {
+    height: fit-content;
+  }
+  #bar-details-text {
+    width: 100%;
+  }
 }
