@@ -44,15 +44,7 @@ public class VisitController {
         return ResponseEntity.ok("Visit added successfully");
     }
 
-    @GetMapping("unique/user/{userId}")
-    public ResponseEntity<List<Bar>> getUnlockedBarsByUserId(@PathVariable int userId) {
-        List<Bar> bars = visitService.getUnlockedBarsByUserId(userId);
-        return ResponseEntity.ok(bars);
-    }
 
-    @GetMapping("bar/{barId}/user/{userId}")
-    public ResponseEntity<Integer> countVisitsInBarByUser(@PathVariable int barId, @PathVariable int userId) {
-        return ResponseEntity.ok(visitService.countVisitsByUser(barId, userId));
-    }
+
 
 }

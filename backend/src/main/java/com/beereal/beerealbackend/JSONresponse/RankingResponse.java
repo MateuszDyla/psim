@@ -4,11 +4,13 @@ import java.time.LocalTime;
 
 public class RankingResponse {
 
+    private int id;
     private String username;
     private int visitedBarsNumber;
     private LocalTime gameplayTime;
 
-    public RankingResponse(String username, int visitedBarsNumber, LocalTime gameplayTime) {
+    public RankingResponse(int id, String username, int visitedBarsNumber, LocalTime gameplayTime) {
+        this.id = id;
         this.username = username;
         this.visitedBarsNumber = visitedBarsNumber;
         this.gameplayTime = gameplayTime;
@@ -36,5 +38,13 @@ public class RankingResponse {
 
     public void setGameplayTime(LocalTime gameplayTime) {
         this.gameplayTime = gameplayTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

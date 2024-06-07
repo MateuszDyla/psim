@@ -1,5 +1,6 @@
 package com.beereal.beerealbackend.controller;
 
+import com.beereal.beerealbackend.JSONresponse.BarDetailsResponse;
 import com.beereal.beerealbackend.model.Bar;
 import com.beereal.beerealbackend.service.BarService;
 import com.beereal.beerealbackend.service.CommentService;
@@ -54,6 +55,20 @@ public class BarController {
         }
 
         return ResponseEntity.ok("Bar added successfully");
+    }
+
+    @GetMapping("{barId}/user/{userId}")
+    public ResponseEntity<BarDetailsResponse> getBarVisitedByUserDetails(@PathVariable int barId, @PathVariable int userId) {
+        return ResponseEntity.ok(visitService.getBarVisitedByDetails(barId, userId));
+    }
+
+    @GetMapping("/{barId}")
+    public ResponseEntity<Bar> getBar(@PathVariable int barId) {
+        Bar bar = barService.getBarByID(barId);
+        if (bar == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(bar);
     }
 
 

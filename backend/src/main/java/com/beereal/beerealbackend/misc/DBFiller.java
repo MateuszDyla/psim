@@ -38,7 +38,7 @@ public class DBFiller {
 //        fillUser();
 //        fillVisit();
 //        fillRanking();
-//        fillComments();
+        fillComments();
     }
 
     public void fillUser() {
@@ -113,7 +113,7 @@ public class DBFiller {
         String[] adj = new String[] {
                 "super", "fajnie", "bombowo", "fajna barmanka", "kocham piwo", "siema", "pozdro dla dziadka", "kocham kelnerke", "6739530304 call me ;)"
         };
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             User user = users.get(randomNumberGenerator.getIntBetween(0, users.size()));
             Bar bar = bars.get(randomNumberGenerator.getIntBetween(0, bars.size()));
 

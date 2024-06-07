@@ -22,7 +22,7 @@ public class RankingServiceImplementation implements RankingService{
         ArrayList<RankingResponse> responses = new ArrayList<>();
         for (int i = 0; i < rankingEntries.size(); i++) {
             RankingEntry entry = rankingEntries.get(i);
-            RankingResponse response = new RankingResponse(entry.getUser().getUsername(), entry.getVisited_bars_number(), entry.getGameplayTime());
+            RankingResponse response = new RankingResponse(entry.getId(), entry.getUser().getUsername(), entry.getVisited_bars_number(), entry.getGameplayTime());
             responses.add(response);
         }
         return responses;
