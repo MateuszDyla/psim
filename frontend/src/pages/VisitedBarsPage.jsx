@@ -7,36 +7,42 @@ import VisitedBarRectangle from "../Components/VisitedBarRectangle";
 import "../styles/VisitedBarsPageStyle.css";
 
 function VisitedBarsPage() {
-  const navigate = useNavigate();
-  const [records, setRecords] = useState([]);
+    const navigate = useNavigate();
+    const [records, setRecords] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/user/5/unlocked")
-      .then((response) => response.json())
-      .then((data) => setRecords(data))
-      .catch((err) => console.log(err));
-  }, []);
+    useEffect(() => {
+        fetch("http://localhost:8080/user/5/unlocked")
+            .then((response) => response.json())
+            .then((data) => setRecords(data))
+            .catch((err) => console.log(err));
+    }, []);
 
-  return (
-    <>
-      <Header />
-      <div className="small-logo-container">
-        <Logo />
-      </div>
-      <div id="visited-bars-placeholder">
-        {records.map((record, index) => (
-          <VisitedBarRectangle
-            barImg={record.imageUrl}
-            barName={record.name} // Assuming the record has a 'name' property
-            date="24.02.2022"
-          />
-        ))}
-      </div>
-      <div className="center">
-        <DarkButton onClick={() => navigate("/main")}>Powrót</DarkButton>
-      </div>
-    </>
-  );
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
+
+    return (
+        <>
+            <Header onLogout={handleLogout} />
+            <div className="small-logo-container">
+                <Logo />
+            </div>
+            <div id="visited-bars-placeholder">
+                {records.map((record, index) => (
+                    <VisitedBarRectangle
+                        key={index}
+                        barImg={record.imageUrl}
+                        barName={record.name}
+                        date="24.02.2022"
+                    />
+                ))}
+            </div>
+            <div className="center">
+                <DarkButton onClick={() => navigate("/main")}>Powrót</DarkButton>
+            </div>
+        </>
+    );
 }
 
 export default VisitedBarsPage;

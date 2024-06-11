@@ -1,16 +1,17 @@
-//Author: Mateusz Dyla
+//Author: Mateusz Dyla, Marta Boryczka
+
 
 import { Component } from "react";
 import "../styles/HeaderStyle.css";
 import { DarkButton } from "./DarkButton";
 
-//Logout bar
 class Header extends Component {
     render() {
-        return(
+        const { onLogout } = this.props;
+        return (
             <>
                 <div id="top-bar">
-                    <DarkButton id="logout-button">Wyloguj się</DarkButton>
+                    <DarkButton id="logout-button" onClick={onLogout}>Wyloguj się</DarkButton>
                 </div>
             </>
         );

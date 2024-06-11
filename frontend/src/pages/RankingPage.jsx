@@ -10,10 +10,13 @@ import { useNavigate } from 'react-router-dom';
 
 function RankingPage() {
     const navigate = useNavigate();
-
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
   return (
         <>
-            <Header/>
+          <Header onLogout={handleLogout} />
             <div className='small-logo-container'>
                 <Logo/>
             </div>
