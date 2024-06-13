@@ -21,6 +21,8 @@ public class Bar {
     private List<Comment> commentList;
     @OneToMany(mappedBy = "bar")
     private List<Visit> visitList;
+    @OneToMany(mappedBy = "currentBar")
+    private List<Game> gameList;
 
 
     public Bar(String name, String address, String imageUrl) {

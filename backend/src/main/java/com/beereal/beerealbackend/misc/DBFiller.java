@@ -1,17 +1,12 @@
 package com.beereal.beerealbackend.misc;
 
 import com.beereal.beerealbackend.model.*;
-import com.beereal.beerealbackend.repository.BarRepository;
-import com.beereal.beerealbackend.repository.UserRepository;
-import com.beereal.beerealbackend.repository.VisitRepository;
 import com.beereal.beerealbackend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,15 +25,20 @@ public class DBFiller {
     @Autowired
     CommentService commentService = new CommentServiceImplementation();
 
+    @Autowired
+    GameService gameService = new GameServiceImplementation();
+
+
 
     RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
     public void fill() {
-//        fillBar();
-//        fillUser();
-//        fillVisit();
-//        fillRanking();
+        fillBar();
+        fillUser();
+        fillVisit();
+        fillRanking();
         fillComments();
+        fillGames();
     }
 
     public void fillUser() {
@@ -119,6 +119,17 @@ public class DBFiller {
 
             Comment comment = new Comment(user, bar, LocalDateTime.now(), adj[randomNumberGenerator.getIntBetween(0, adj.length)]);
             commentService.addComment(comment);
+        }
+    }
+    public void fillGames() {
+        List<User> users = userService.getAll();
+        List<Bar> bars = barService.getAllBars();
+
+        for (int i = 0; i < users.size(); i++) {
+            Bar bar = bars.get(randomNumberGenerator.getIntBetween(0, bars.size()));
+            Game game = new Game(users.get(i), bar, LocalTime.of(0, randomNumberGenerator.getIntBetween(0, 30)));
+            gameService.addGame(game);
+
         }
     }
 }

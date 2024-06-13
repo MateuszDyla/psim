@@ -11,7 +11,7 @@ public class BeerealbackendApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(BeerealbackendApplication.class, args);
 		DBFiller dbFiller = context.getBean(DBFiller.class);
-		//dbFiller.fill();
+		dbFiller.fill();
 	}
 
 }

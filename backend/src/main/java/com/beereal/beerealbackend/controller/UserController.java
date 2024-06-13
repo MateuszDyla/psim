@@ -55,8 +55,7 @@ public class UserController {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
-        // Ustal czas wygaśnięcia tokenu (np. 1 godzina)
-        long expMillis = nowMillis + 3600000; // 1 godzina
+        long expMillis = nowMillis + 3600000; // 1 hour
         Date exp = new Date(expMillis);
 
         return Jwts.builder()
