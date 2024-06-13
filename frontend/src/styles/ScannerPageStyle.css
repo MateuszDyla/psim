@@ -1,0 +1,34 @@
+.navy-background {
+  background-color: #002131;
+  width: 100vw;
+  height: 100vh;
+}
+
+.scanner-buttons {
+  position: fixed;
+  width: 100%;
+  display: flex;
+}
+
+.scan-button-left {
+  display: inline-block;
+  max-width: 80vw;
+  float: left;
+}
+.scan-button-right {
+  display: inline-block;
+  float: left;
+  max-width: 20vw;
+}
+.scan-button-left * {
+  max-width: 100%;
+  min-width: 65vw;
+  padding: 20px 0px;
+  max-height: 50px;
+}
+.scan-button-right * {
+  max-width: 100%;
+  min-width: 30vw;
+  max-height: 50px;
+  padding: 20px 0px;
+}
