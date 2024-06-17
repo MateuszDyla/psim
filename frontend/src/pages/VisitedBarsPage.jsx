@@ -11,7 +11,13 @@ function VisitedBarsPage() {
     const [records, setRecords] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/5/unlocked")
+        const token = localStorage.getItem('token');
+
+        fetch("http://localhost:8080/user/unlocked", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => setRecords(data))
             .catch((err) => console.log(err));
@@ -34,6 +40,7 @@ function VisitedBarsPage() {
                         key={index}
                         barImg={record.imageUrl}
                         barName={record.name}
+                        barId={record.id}
                         date="24.02.2022"
                     />
                 ))}
@@ -43,6 +50,7 @@ function VisitedBarsPage() {
             </div>
         </>
     );
+
 }
 
 export default VisitedBarsPage;

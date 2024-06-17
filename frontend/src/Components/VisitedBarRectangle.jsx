@@ -1,23 +1,22 @@
-//Author: Mateusz Dyla
-import React from 'react'
-import '../styles/VisitedBarStyle.css'
+import React from 'react';
+import '../styles/VisitedBarStyle.css';
 import { useNavigate } from 'react-router-dom';
 
+// "Tile" with the name and image of the bar, and the last visit date.
+function VisitedBarRectangle({ barImg, barName, barId, date }) {
+    const navigate = useNavigate();
 
-//"Tile" with the name and image of the bar, and the last visit date.
-function VisitedBarRectangle(props) {
+    const handleClick = () => {
+        navigate(`/bar-details?id=${barId}`);
+    };
 
-  const navigate = useNavigate();
-
-
-  return (
-    <div id ="visited-bar" onClick={()=>navigate("/bary?id=1")}>
-      <p className="bar-name">{props.barName}</p>
-      <p className="bar-date">{props.date}</p>
-      <img src={props.barImg}/>
-
-    </div>
-  )
+    return (
+        <div id="visited-bar" onClick={handleClick}>
+            <p className="bar-name">{barName}</p>
+            <p className="bar-date">{date}</p>
+            <img src={barImg} alt={`${barName} Image`} />
+        </div>
+    );
 }
 
-export default VisitedBarRectangle
+export default VisitedBarRectangle;

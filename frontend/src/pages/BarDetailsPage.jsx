@@ -3,14 +3,18 @@ import "../styles/BarDetailsPageStyle.css";
 import Header from "../Components/Header";
 import Logo from "../Components/Logo";
 import CommentCanva from "../Components/CommentCanva";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function BarDetailsPage() {
-    const queryParameters = new URLSearchParams(window.location.search);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const queryParameters = new URLSearchParams(location.search);
     const id = queryParameters.get("id");
 
     const [barInfo, setBarInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/');
@@ -75,6 +79,7 @@ function BarDetailsPage() {
             </div>
         </>
     );
+
 }
 
 export default BarDetailsPage;
