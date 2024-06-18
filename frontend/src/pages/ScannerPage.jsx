@@ -22,6 +22,8 @@ function ScannerPage() {
   };
 
   const onScan = async (result) => {
+    console.log(bar.currentBar.name);
+    console.log(userId);
     if (result[0].rawValue == md5(bar.currentBar.name)) {
       document.getElementById("scanner-output").innerText =
         "SUKCES! Powróć do gry";
@@ -33,6 +35,22 @@ function ScannerPage() {
 
         await fetch(`http://localhost:8080/game/${userId}?barId=${barId}`, {
           method: "PUT",
+        });
+
+        const now = new Date();
+        const isoDateTime = now.toISOString();
+        console.log(isoDateTime);
+
+        await fetch("http://localhost:8080/visits/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userID: userId,
+            barID: bar.currentBar.id,
+            date: isoDateTime,
+          }),
         });
       } catch (err) {
         console.log(err);
@@ -46,7 +64,6 @@ function ScannerPage() {
 
   useEffect(() => {
     setLoading(true);
-    //nizej id uzytkownika
     fetch("http://localhost:8080/game/" + userId)
       .then((response) => response.json())
       .then((data) => setBar(data))

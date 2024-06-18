@@ -8,72 +8,108 @@ import "../styles/GamePageStyle.css";
 import { useNavigate } from "react-router-dom";
 
 function GamePage() {
-    const [records, setRecords] = useState(null);
-    const [scanMode, setScanMode] = useState(0); 
-    const width = window.innerWidth;
-    const userId = localStorage.getItem('userId');
+  const width = window.innerWidth;
+  const userId = localStorage.getItem("userId");
+  const [bar, setBar] = useState(null);
+  const [game, setGame] = useState(null);
 
-    useEffect(() => {
-        async function fetchBar() {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await fetch("http://localhost:8080/bars/getRandom", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                setRecords(data);
-            } catch (err) {
-                console.log(err);
-            }
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/game/" + userId);
+        const data = await response.json();
+        setBar(data.currentBar);
+        setGame(data);
+      } catch (err) {
+        console.log(err);
+        try {
+          const response = await fetch("http://localhost:8080/bars/getRandom");
+          const randomBar = await response.json();
+          const responseGame = await fetch("http://localhost:8080/game", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userID: userId,
+              barID: randomBar.id,
+            }),
+          });
+          const newGame = await responseGame.json();
+          console.log(newGame);
+          setGame(newGame);
+          if (!bar) {
+            setBar(newGame.currentBar);
+          }
+        } catch (innerErr) {
+          console.log(innerErr);
         }
-        fetchBar();
-    }, []);
-
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        navigate("/");
+      } finally {
+        setLoading(false);
+      }
     };
 
-    const onScan = (result) => {
-        if (result) {
-            console.log(result);
-            const url = result[0].rawValue;
-            console.log(url);
-            fetchBar();
-        }
-    };
+    fetchData();
+  }, []);
 
-    if (width > 500) {
-        return <div> z kompem raczej nie będziesz biegał alkoholiku</div>;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/");
+  };
+
+  const endGame = async () => {
+    try {
+      await fetch("http://localhost:8080/game/" + userId, {
+        method: "DELETE",
+      });
+      navigate("/main");
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    return (
-        <div className="background">
-            <Header onLogout={handleLogout} />
-            <div className="small-logo-container">
-                <Logo />
-            </div>
-            {records && (
-                <CurrentGameBar
-                    img="https://travel-mates.pl/wp-content/uploads/2022/11/Cybermachina0-1080x1080.jpg"
-                    barName={records.name}
-                    barDesc={records.address}
-                />
-            )}
-            <div className="timer">
-                <Timer duration={30 * 60 * 1000} />
-            </div>
-            <div className="game-bottom">
-                <DarkButton onClick={() => navigate("/scanner")}>Zeskanuj</DarkButton>{" "}
-                <DarkButton>Powrót</DarkButton>
-            </div>
-        </div>
-    );
+  if (width > 500) {
+    return <div> z kompem raczej nie będziesz biegał alkoholiku</div>;
+  }
+
+  let remainingTime = 0;
+  if (game && game.finishUntil) {
+    const dateUntil = new Date(game.finishUntil);
+    const currentDate = new Date();
+    remainingTime = dateUntil - currentDate;
+    console.log(remainingTime);
+  }
+
+  return (
+    <div className="background">
+      <Header onLogout={handleLogout} />
+      <div className="tiny-logo-container">
+        <Logo />
+      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        bar && (
+          <CurrentGameBar
+            img={bar.imageUrl}
+            barName={bar.name}
+            barDesc={bar.address}
+          />
+        )
+      )}
+      <div className="timer">{game && <Timer duration={remainingTime} />}</div>
+      <div className="game-bottom">
+        <DarkButton onClick={() => navigate("/scanner")}>Zeskanuj</DarkButton>{" "}
+        <DarkButton onClick={() => navigate("/main")}>Powrót</DarkButton>
+        <DarkButton onClick={endGame}>Zakończ</DarkButton>
+      </div>
+    </div>
+  );
 }
 
 export default GamePage;

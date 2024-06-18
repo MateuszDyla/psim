@@ -1,41 +1,36 @@
 #visited-bars-placeholder {
-    text-align: center;
-    align-items: center;
-    width: 99vw;
-    margin-bottom: 50px;
-    display: grid;
-    column-gap: 20px;
-    row-gap: 20px;
-    column-count: 3;
+  text-align: center;
+  align-items: center;
+  width: 99vw;
+  margin-bottom: 50px;
+  display: grid;
+  column-gap: 20px;
+  row-gap: 20px;
+  column-count: 3;
+  justify-items: center;
+  padding: 0px 30px;
+  margin-top: 50px;
+  cursor: pointer;
+  text-wrap: wrap;
+}
+
+@media screen and (max-width: 1200px) {
+  #visited-bars-placeholder {
+    grid-template-columns: repeat(2, 2fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #visited-bars-placeholder {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    margin: 0 auto;
     justify-items: center;
-    padding: 0px 30px;
-    margin-top: 50px;
-    cursor: pointer;
-    text-wrap:wrap;
+  }
 }
 
-@media screen and (max-width: 1200px){
-    #visited-bars-placeholder {
-        grid-template-columns: repeat(2, 2fr);
-    }
-}
-
-@media screen and (max-width: 800px){
-    #visited-bars-placeholder {
-        grid-template-columns: 1fr;
-        padding: 10px;
-        margin: 0 auto;
-        justify-items: center;
-
-    }
-}
-
-
-
-@media screen  and (min-width: 1200px){
-    
-    #visited-bars-placeholder {
-        grid-template-columns: repeat(3, 3fr);
-    }
-
+@media screen and (min-width: 1200px) {
+  #visited-bars-placeholder {
+    grid-template-columns: repeat(3, 3fr);
+  }
 }
