@@ -4,8 +4,6 @@ import com.beereal.beerealbackend.JSONresponse.BarDetailsResponse;
 import com.beereal.beerealbackend.model.Bar;
 import com.beereal.beerealbackend.model.Visit;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 public interface VisitService {

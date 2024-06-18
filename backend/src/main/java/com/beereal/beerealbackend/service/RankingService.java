@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 
 public interface RankingService {
-    public List<RankingResponse> getRanking();
+    List<RankingResponse> getRanking();
 
-    public RankingEntry addEntry(RankingEntry rankingEntry);
+    RankingEntry addEntry(RankingEntry rankingEntry);
 }

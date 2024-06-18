@@ -1,7 +1,5 @@
 package com.beereal.beerealbackend.dto;
 
-import java.sql.Time;
-import java.time.Duration;
 import java.time.LocalTime;
 
 public class RankingEntryDTO {

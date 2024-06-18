@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentServiceImplementation implements CommentService {
@@ -19,18 +18,17 @@ public class CommentServiceImplementation implements CommentService {
         return commentRepository.save(comment);
     }
 
-    @Override
-    public Comment getCommentByBarId(int barId) {
-        Optional<Comment> commentOptional = commentRepository.findFirstByBarId(barId);
-        return commentOptional.orElse(null);
-    }
-
+    /***
+     *
+     * @param barId id baru
+     * @return lista wszystkich komentarzów (wartości tekstowych) dla podanego baru
+     */
     @Override
     public List<String> getCommentTextsByBarId(int barId) {
-        List<String> commentsStrings = new ArrayList<String>();
+        List<String> commentsStrings = new ArrayList<>();
         List<Comment> comments =  commentRepository.findByBarId(barId);
-        for (int i = 0; i < comments.size(); i++) {
-            commentsStrings.add(comments.get(i).getText());
+        for (Comment comment : comments) {
+            commentsStrings.add(comment.getText());
         }
         return commentsStrings;
     }

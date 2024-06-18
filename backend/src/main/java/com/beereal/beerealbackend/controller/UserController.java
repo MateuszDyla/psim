@@ -4,41 +4,57 @@ import com.beereal.beerealbackend.model.Bar;
 import com.beereal.beerealbackend.model.User;
 import com.beereal.beerealbackend.service.UserService;
 import com.beereal.beerealbackend.service.VisitService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import io.jsonwebtoken.Claims;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private VisitService visitService;
+    private final UserService userService;
+    private final VisitService visitService;
 
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @PostMapping("/register")
-    public String register(@RequestBody User user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        userService.registerUser(user);
-        return "Student added";
+    public UserController(UserService userService, VisitService visitService) {
+        this.userService = userService;
+        this.visitService = visitService;
     }
 
+    /**
+     * Rejestruje użytkownika
+     * @param user dane użytkownika
+     * @return status operacji dodania uzytkownika do bazy danych
+     */
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody User user) {
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+        User registeredUser = userService.registerUser(user);
+        if (registeredUser != null)
+            return ResponseEntity.status(200).body("User added");
+        else return ResponseEntity.badRequest().build();
+    }
+
+    /***
+     *
+     * @param loginData dane logowania (username, hasło)
+     * @return status logowania
+     */
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> loginData) {
         String username = loginData.get("username");
@@ -46,12 +62,17 @@ public class UserController {
 
         if (userService.authenticateUser(username, password)) {
             String token = generateToken(username);
-            return ResponseEntity.ok(token);
+            return ok(token);
         } else {
             return ResponseEntity.status(401).body("Not authenticated");
         }
     }
 
+    /***
+     *
+     * @param username nazwa uzytkownika
+     * @return token użytkownika
+     */
     private String generateToken(String username) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
@@ -73,6 +94,11 @@ public class UserController {
                 .compact();
     }
 
+    /***
+     * Podaje id użytkownika na podstawie tokenu autentykacji
+     * @param token token jwt
+     * @return id użytkownika
+     */
     @GetMapping("/getUserId")
     public ResponseEntity<Integer> getUserId(@RequestHeader("Authorization") String token) {
         try {
@@ -82,16 +108,21 @@ public class UserController {
                     .build()
                     .parseClaimsJws(tokenWithoutBearer)
                     .getBody();
-            return ResponseEntity.ok((Integer) claims.get("userId"));
+            return ok((Integer) claims.get("userId"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(null);
         }
     }
 
+    /**
+     *
+     * @param userId id uzytkownika
+     * @return Lista odwiedzonych barów przez danego użytkownika (odwiedzenie = wpis do tablicy wizyt)
+     */
     @GetMapping("/{userId}/unlocked")
     public ResponseEntity<List<Bar>> getUnlockedBarsByUserId(@PathVariable int userId) {
         List<Bar> bars = visitService.getUnlockedBarsByUserId(userId);
-        return ResponseEntity.ok(bars);
+        return ok(bars);
     }
 }

@@ -33,6 +33,13 @@ public class GameServiceImplementation implements GameService {
         gameRepository.delete(game);
     }
 
+    /***
+     * Aktualizuje stan gru aktualnego użytkownika - dodaje minuty po wizycie w barze i inkrementuje licznik odwiedzonych barów
+     * @param userId id użytkownika
+     * @param barId id baru
+     * @param minutesToAdd minuty do inkrementacji po wizycie w barze
+     * @return
+     */
     @Override
     public Game updateGame(int userId, int barId, long minutesToAdd) {
         Game game = findActiveUserGame(userId);

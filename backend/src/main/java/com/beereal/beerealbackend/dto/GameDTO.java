@@ -1,7 +1,6 @@
 package com.beereal.beerealbackend.dto;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class GameDTO {
 

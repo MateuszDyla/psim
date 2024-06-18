@@ -1,6 +1,5 @@
 package com.beereal.beerealbackend.dto;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class VisitDTO {

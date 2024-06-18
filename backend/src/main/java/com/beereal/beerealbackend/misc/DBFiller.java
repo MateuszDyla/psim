@@ -37,7 +37,7 @@ public class DBFiller {
 //        fillUser();
 //        fillVisit();
 //        fillRanking();
-//        fillComments();
+        fillComments();
         fillGames();
     }
 

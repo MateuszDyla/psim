@@ -10,7 +10,4 @@ import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
     List<Comment> findByBarId(int barId);
-
-    @Query("SELECT c FROM Comment c WHERE c.bar.id = :barId")
-    Optional<Comment> findFirstByBarId(@Param("barId") int barId);
 }

@@ -3,7 +3,6 @@ package com.beereal.beerealbackend.JSONresponse;
 import com.beereal.beerealbackend.model.Bar;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class BarDetailsResponse {
     Bar bar;

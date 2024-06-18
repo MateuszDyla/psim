@@ -7,22 +7,31 @@ import com.beereal.beerealbackend.model.Visit;
 import com.beereal.beerealbackend.service.BarService;
 import com.beereal.beerealbackend.service.UserService;
 import com.beereal.beerealbackend.service.VisitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/visits")
 public class VisitController {
-    @Autowired
-    private VisitService visitService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private BarService barService;
+    private final VisitService visitService;
+    private final UserService userService;
+    private final BarService barService;
 
+    public VisitController(VisitService visitService, UserService userService, BarService barService) {
+        this.visitService = visitService;
+        this.userService = userService;
+        this.barService = barService;
+    }
+
+    /***
+     * Dodaje wizytę do bazy danych wizyt
+     * Wywołane po pomyślnym zeskanowaniu kodu qr
+     * @param visitDTO dane wizyty
+     * @return status wykonania operacji
+     */
     @PostMapping("/")
     public ResponseEntity<String> addVisit(@RequestBody VisitDTO visitDTO) {
         User user = userService.getUserByID(visitDTO.getUserID());

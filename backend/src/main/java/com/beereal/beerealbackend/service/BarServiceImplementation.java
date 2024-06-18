@@ -23,6 +23,7 @@ public class BarServiceImplementation implements BarService {
 
     @Override
     public Bar addBar(Bar bar) {
+
         return barRepository.save(bar);
     }
 

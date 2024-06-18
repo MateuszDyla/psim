@@ -35,7 +35,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public boolean authenticateUser(String username, String password) {
         Optional<User> userOptional = userRepository.findByUsername(username);
-        if (!userOptional.isPresent())
+        if (userOptional.isEmpty())
             return false;
         User user = userOptional.get();
         return passwordEncoder.matches(password, user.getPassword());

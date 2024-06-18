@@ -6,8 +6,6 @@ import com.beereal.beerealbackend.model.RankingEntry;
 import com.beereal.beerealbackend.model.User;
 import com.beereal.beerealbackend.service.RankingService;
 import com.beereal.beerealbackend.service.UserService;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,17 +14,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/ranking")
 public class RankingController {
-    @Autowired
-    private RankingService rankingService;
-    @Autowired
+    private final RankingService rankingService;
+    final
     UserService userService;
 
+    public RankingController(RankingService rankingService, UserService userService) {
+        this.rankingService = rankingService;
+        this.userService = userService;
+    }
+
+    /***
+     * Zwraca wszystkie wiersze rankingu w postaci RankingResponse
+     * @return Lista RankingResponse
+     */
     @GetMapping("/")
     public ResponseEntity<List<RankingResponse>> getRanking() {
         List<RankingResponse> list = rankingService.getRanking();
         return ResponseEntity.ok(list);
     }
 
+    /**
+     * Dodaje nowy wpis do rankingu
+     * Wywołane po zakończeniu gry
+     * @param rankingEntryDTO
+     * @return Status operacji
+     */
     @PostMapping("/")
     public ResponseEntity<String> addEntry(@RequestBody RankingEntryDTO rankingEntryDTO) {
         User user = userService.getUserByID(rankingEntryDTO.getUserID());

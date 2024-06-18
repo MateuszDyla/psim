@@ -8,7 +8,6 @@ import com.beereal.beerealbackend.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,11 +29,10 @@ public class VisitServiceImplementation implements VisitService {
     public List<Bar> getUnlockedBarsByUserId(int userId) {
         ArrayList<Bar> bars = new ArrayList<>();
         List<Visit> visits = visitRepository.findByUserIdOrderByDate(userId);
-        for (int i = 0; i < visits.size(); i++) {
-            bars.add(visits.get(i).getBar());
+        for (Visit visit : visits) {
+            bars.add(visit.getBar());
         }
-        List<Bar> result = new ArrayList<>(new HashSet<>(bars));
-        return result;
+        return new ArrayList<>(new HashSet<>(bars));
     }
 
     @Override
@@ -55,12 +53,11 @@ public class VisitServiceImplementation implements VisitService {
         int visits = countVisitsInBar(barId);
         //LocalDateTime lastVisit = getLastVisitDate(barId, userId);
         Optional<Bar> optionalBar = barRepository.findById(barId);
-        if (!optionalBar.isPresent())
+        if (optionalBar.isEmpty())
             return null;
         Bar bar = optionalBar.get();
 
-        BarDetailsResponse barDetailsResponse = new BarDetailsResponse(bar, visits, visitsByUser);
-        return barDetailsResponse;
+        return new BarDetailsResponse(bar, visits, visitsByUser);
     }
 
 }
