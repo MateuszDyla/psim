@@ -1,17 +1,26 @@
 package com.beereal.beerealbackend.dto;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class GameDTO {
 
     private int userID;
     private int barID;
-    private LocalTime elapsedTime;
+    private LocalDateTime finishUntil;
 
-    public GameDTO(int userID, int barID, LocalTime elapsedTime) {
+    public GameDTO(int userID, int barID, LocalDateTime finishUntil) {
         this.userID = userID;
         this.barID = barID;
-        this.elapsedTime = elapsedTime;
+        this.finishUntil = finishUntil;
+    }
+
+    public GameDTO(int userID, int barID) {
+        this.userID = userID;
+        this.barID = barID;
+    }
+
+    public GameDTO() {
     }
 
     public int getUserID() {
@@ -30,11 +39,11 @@ public class GameDTO {
         this.barID = barID;
     }
 
-    public LocalTime getElapsedTime() {
-        return elapsedTime;
+    public LocalDateTime getFinishUntil() {
+        return finishUntil;
     }
 
-    public void setElapsedTime(LocalTime elapsedTime) {
-        this.elapsedTime = elapsedTime;
+    public void setFinishUntil(LocalDateTime finishUntil) {
+        this.finishUntil = finishUntil;
     }
 }

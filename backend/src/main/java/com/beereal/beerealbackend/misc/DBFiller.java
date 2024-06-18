@@ -38,7 +38,7 @@ public class DBFiller {
 //        fillVisit();
 //        fillRanking();
 //        fillComments();
-//        fillGames();
+        fillGames();
     }
 
     public void fillUser() {
@@ -127,7 +127,7 @@ public class DBFiller {
 
         for (int i = 0; i < users.size(); i++) {
             Bar bar = bars.get(randomNumberGenerator.getIntBetween(0, bars.size()));
-            Game game = new Game(users.get(i), bar, LocalTime.of(0, randomNumberGenerator.getIntBetween(0, 30)));
+            Game game = new Game(users.get(i), bar, LocalDateTime.now().plusMinutes(randomNumberGenerator.getIntBetween(0, 120)), 0);
             gameService.addGame(game);
 
         }

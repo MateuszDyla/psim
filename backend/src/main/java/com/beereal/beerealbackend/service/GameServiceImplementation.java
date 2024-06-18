@@ -7,7 +7,7 @@ import com.beereal.beerealbackend.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -38,8 +38,9 @@ public class GameServiceImplementation implements GameService {
         Game game = findActiveUserGame(userId);
         Optional<Bar> bar = barRepository.findById(barId);
         game.setCurrentBar(bar.get());
-        LocalTime newTime = game.getElapsedTime().plusMinutes(minutesToAdd);
-        game.setElapsedTime(newTime);
+        game.setVisitedBars(game.getVisitedBars()+1);
+        LocalDateTime newTime = game.getFinishUntil().plusMinutes(minutesToAdd);
+        game.setFinishUntil(newTime);
         return gameRepository.save(game);
     }
 }

@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @RestController
 @RequestMapping("/game")
@@ -27,24 +28,31 @@ public class GameController {
     long addedMinutes = 15;
 
     @PostMapping()
-    public ResponseEntity<String> addEntry(@RequestBody GameDTO gameDTO) {
+    public ResponseEntity<Game> addEntry(@RequestBody GameDTO gameDTO) {
        User user =  userService.getUserByID(gameDTO.getUserID());
         if (user == null)
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().build();
         Bar bar = barService.getBarByID(gameDTO.getBarID());
         if (bar == null)
-            return ResponseEntity.badRequest().body("Bar not found");
-        Game game = new Game(user, bar, gameDTO.getElapsedTime());
+            return ResponseEntity.badRequest().build();
+
+        LocalDateTime finishTime = LocalDateTime.now(ZoneId.of("Europe/Paris")).plusMinutes(2 * addedMinutes);
+        if(gameDTO.getFinishUntil() != null)
+            finishTime = gameDTO.getFinishUntil();
+        Game game = new Game(user, bar, finishTime, 0);
         Game savedGame = gameService.addGame(game);
         if (savedGame == null)
-            return ResponseEntity.badRequest().body("Error");
+            return ResponseEntity.badRequest().build();
 
-        return ResponseEntity.ok("Game created");
+        return ResponseEntity.ok(game);
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<Game> showActiveUserGame(@PathVariable Integer userId) {
-        return ResponseEntity.ok(gameService.findActiveUserGame(userId));
+        Game game = gameService.findActiveUserGame(userId);
+        if (game != null)
+            return ResponseEntity.ok(gameService.findActiveUserGame(userId));
+        else return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{userId}")

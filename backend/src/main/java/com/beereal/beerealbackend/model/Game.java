@@ -2,7 +2,7 @@ package com.beereal.beerealbackend.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 public class Game {
@@ -17,18 +17,22 @@ public class Game {
     @JoinColumn(nullable = false, name="current_bar_id")
     private Bar currentBar;
 
-    @Column(nullable = false, name="elapsed_time")
-    private LocalTime elapsedTime;
+    @Column(nullable = false, name="finish_until")
+    private LocalDateTime finishUntil;
+
+    @Column(nullable = false, name="visited_bars")
+    int visitedBars;
 
 
 
     public Game() {
     }
 
-    public Game(User user, Bar lastBar, LocalTime elapsedTime) {
+    public Game(User user, Bar lastBar, LocalDateTime finishUntil, int visitedBars) {
         this.user = user;
         this.currentBar = lastBar;
-        this.elapsedTime = elapsedTime;
+        this.finishUntil = finishUntil;
+        this.visitedBars = visitedBars;
     }
 
     public int getId() {
@@ -55,11 +59,21 @@ public class Game {
         this.currentBar = currentBar;
     }
 
-    public LocalTime getElapsedTime() {
-        return elapsedTime;
+    public LocalDateTime getFinishUntil() {
+        return finishUntil;
     }
 
-    public void setElapsedTime(LocalTime elapsedTime) {
-        this.elapsedTime = elapsedTime;
+    public void setFinishUntil(LocalDateTime finishUntil) {
+        this.finishUntil = finishUntil;
+    }
+
+    public int getVisitedBars() {
+        return visitedBars;
+    }
+
+    public void setVisitedBars(int visitedBars) {
+        this.visitedBars = visitedBars;
     }
 }
+
+

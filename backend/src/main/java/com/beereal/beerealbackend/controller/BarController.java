@@ -35,6 +35,12 @@ public class BarController {
         return ResponseEntity.ok(bar);
     }
 
+    @GetMapping("/getRandomId")
+    public ResponseEntity<Integer> getRandomBarId() {
+        Bar bar = barService.getRandomBar();
+        return ResponseEntity.ok(bar.getId());
+    }
+
     @PostMapping("/add")
     public ResponseEntity<String> addBar(@RequestBody Bar bar) {
         if (bar.getName() == null || bar.getName().isEmpty()) {
@@ -57,7 +63,7 @@ public class BarController {
         return ResponseEntity.ok("Bar added successfully");
     }
 
-    @GetMapping("/{barId}/user/{userId}")
+    @GetMapping("{barId}/user/{userId}")
     public ResponseEntity<BarDetailsResponse> getBarVisitedByUserDetails(@PathVariable int barId, @PathVariable int userId) {
         return ResponseEntity.ok(visitService.getBarVisitedByDetails(barId, userId));
     }
