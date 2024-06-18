@@ -41,7 +41,7 @@ function ScannerPage() {
         const isoDateTime = now.toISOString();
         console.log(isoDateTime);
 
-        await fetch("http://localhost:8080/visits/add", {
+        await fetch("http://localhost:8080/visits/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

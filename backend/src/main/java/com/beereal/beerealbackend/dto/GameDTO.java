@@ -8,11 +8,14 @@ public class GameDTO {
     private int userID;
     private int barID;
     private LocalDateTime finishUntil;
+    private LocalDateTime startDate;
 
-    public GameDTO(int userID, int barID, LocalDateTime finishUntil) {
+
+    public GameDTO(int userID, int barID, LocalDateTime finishUntil, LocalDateTime startDate) {
         this.userID = userID;
         this.barID = barID;
         this.finishUntil = finishUntil;
+        this.startDate = startDate;
     }
 
     public GameDTO(int userID, int barID) {
@@ -45,5 +48,13 @@ public class GameDTO {
 
     public void setFinishUntil(LocalDateTime finishUntil) {
         this.finishUntil = finishUntil;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 }
