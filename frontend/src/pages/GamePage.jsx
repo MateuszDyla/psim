@@ -6,7 +6,6 @@ import { DarkButton } from "../Components/DarkButton";
 import Timer from "../Components/Timer";
 import "../styles/GamePageStyle.css";
 import { useNavigate } from "react-router-dom";
-import "date-diff";
 
 function GamePage() {
   const width = window.innerWidth;
