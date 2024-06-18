@@ -96,6 +96,7 @@ function GamePage() {
     } catch (err) {
       console.log(err);
     }
+    navigate("/main");
   };
   if (width > 500) {
     return <div> z kompem raczej nie będziesz biegał alkoholiku</div>;
