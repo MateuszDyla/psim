@@ -3,6 +3,7 @@ package com.beereal.beerealbackend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Entity
 public class Game {
@@ -16,7 +17,8 @@ public class Game {
     @ManyToOne
     @JoinColumn(nullable = false, name="current_bar_id")
     private Bar currentBar;
-
+    @Column(nullable = false, name="start_date")
+    private LocalDateTime startDate;
     @Column(nullable = false, name="finish_until")
     private LocalDateTime finishUntil;
 
@@ -29,6 +31,7 @@ public class Game {
     }
 
     public Game(User user, Bar lastBar, LocalDateTime finishUntil, int visitedBars) {
+        startDate = LocalDateTime.now(ZoneId.of("Europe/Paris"));
         this.user = user;
         this.currentBar = lastBar;
         this.finishUntil = finishUntil;
@@ -73,6 +76,14 @@ public class Game {
 
     public void setVisitedBars(int visitedBars) {
         this.visitedBars = visitedBars;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 }
 

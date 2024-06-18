@@ -6,6 +6,7 @@ import { DarkButton } from "../Components/DarkButton";
 import Timer from "../Components/Timer";
 import "../styles/GamePageStyle.css";
 import { useNavigate } from "react-router-dom";
+import "date-diff";
 
 function GamePage() {
   const width = window.innerWidth;
@@ -67,12 +68,36 @@ function GamePage() {
       await fetch("http://localhost:8080/game/" + userId, {
         method: "DELETE",
       });
-      navigate("/main");
+
+      if (game.visitedBars >= 0) {
+        console.log(game.visitedBars);
+
+        let dateDiff = 0;
+        if (game && game.startDate) {
+          const dateNow = Date();
+          const startDate = game.startDate;
+          dateDiff = Date.parse(dateNow) - Date.parse(startDate);
+          dateDiff = new Date(dateDiff).toISOString().slice(11, 19);
+        }
+
+        await fetch("http://localhost:8080/ranking/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userID: userId,
+            visitedBarsNumber: game.visitedBars,
+            gameplayTime: dateDiff,
+          }),
+        });
+      }
+      // navigate("/main");
     } catch (err) {
       console.log(err);
     }
+    navigate("/main");
   };
-
   if (width > 500) {
     return <div> z kompem raczej nie będziesz biegał alkoholiku</div>;
   }
@@ -102,7 +127,9 @@ function GamePage() {
           />
         )
       )}
-      <div className="timer">{game && <Timer duration={remainingTime} />}</div>
+      <div className="timer">
+        {game && <Timer duration={remainingTime} onTimeout={endGame} />}
+      </div>
       <div className="game-bottom">
         <DarkButton onClick={() => navigate("/scanner")}>Zeskanuj</DarkButton>{" "}
         <DarkButton onClick={() => navigate("/main")}>Powrót</DarkButton>
