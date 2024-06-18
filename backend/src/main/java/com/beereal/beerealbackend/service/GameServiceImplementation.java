@@ -2,16 +2,20 @@ package com.beereal.beerealbackend.service;
 
 import com.beereal.beerealbackend.model.Bar;
 import com.beereal.beerealbackend.model.Game;
+import com.beereal.beerealbackend.repository.BarRepository;
 import com.beereal.beerealbackend.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Service
 public class GameServiceImplementation implements GameService {
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private BarRepository barRepository;
 
     @Override
     public Game addGame(Game game) {
@@ -30,7 +34,12 @@ public class GameServiceImplementation implements GameService {
     }
 
     @Override
-    public void updateTimeAndBar(Game game, Bar bar, LocalTime time) {
-
+    public Game updateGame(int userId, int barId, long minutesToAdd) {
+        Game game = findActiveUserGame(userId);
+        Optional<Bar> bar = barRepository.findById(barId);
+        game.setCurrentBar(bar.get());
+        LocalTime newTime = game.getElapsedTime().plusMinutes(minutesToAdd);
+        game.setElapsedTime(newTime);
+        return gameRepository.save(game);
     }
 }

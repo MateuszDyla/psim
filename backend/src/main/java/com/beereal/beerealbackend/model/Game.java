@@ -20,6 +20,8 @@ public class Game {
     @Column(nullable = false, name="elapsed_time")
     private LocalTime elapsedTime;
 
+
+
     public Game() {
     }
 

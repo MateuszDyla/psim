@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
+
 @RestController
 @RequestMapping("/game")
 public class GameController {
@@ -22,7 +24,7 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-
+    long addedMinutes = 15;
 
     @PostMapping()
     public ResponseEntity<String> addEntry(@RequestBody GameDTO gameDTO) {
@@ -40,18 +42,24 @@ public class GameController {
         return ResponseEntity.ok("Game created");
     }
 
-    @PostMapping("/user/{id}")
+    @GetMapping("/{userId}")
     public ResponseEntity<Game> showActiveUserGame(@PathVariable Integer userId) {
         return ResponseEntity.ok(gameService.findActiveUserGame(userId));
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUserGame(@PathVariable int userId){
         gameService.deleteUserGame(userId);
         return ResponseEntity.ok().build();
     }
 
-    
+    @PutMapping("/{userId}")
+    public ResponseEntity<Game> updateGame(@PathVariable int userId, @RequestParam int barId) {
 
+        Game updatedgame = gameService.updateGame(userId, barId, addedMinutes);
+        if (updatedgame == null)
+            return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(updatedgame);
+    }
 
 }
