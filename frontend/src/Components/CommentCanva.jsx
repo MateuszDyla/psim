@@ -28,7 +28,7 @@ function CommentCanva(props) {
   }, [props.id]);
 
   useEffect(() => {
-    if (!loading && data.length > 0 && canvasRef.current) {
+    if (!loading && canvasRef.current) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
 
