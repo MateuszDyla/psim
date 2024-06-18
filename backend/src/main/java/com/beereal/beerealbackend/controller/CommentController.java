@@ -24,7 +24,7 @@ public class CommentController {
     @Autowired
     private BarService barService;
 
-    @PostMapping("/post")
+    @PostMapping("/")
     public ResponseEntity<String> addComment(@RequestBody CommentDTO commentDTO) {
         User user = userService.getUserByID(commentDTO.getUserID());
         if (user == null)
