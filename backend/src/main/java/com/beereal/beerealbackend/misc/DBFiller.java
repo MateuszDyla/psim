@@ -35,9 +35,9 @@ public class DBFiller {
     public void fill() {
 //        fillBar();
 //        fillUser();
-        fillVisit();
-        fillRanking();
-        fillComments();
+//        fillVisit();
+//        fillRanking();
+//        fillComments();
 //        fillGames();
     }
 

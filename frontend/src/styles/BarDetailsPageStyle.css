@@ -17,13 +17,14 @@
 }
 
 #bar-details-text {
-  width: 80%;
-  height: 100%;
-  position: relative;
-  text-align: left;
-  float: left; /* add this to make it fit next to the image */
-  color: white;
-  padding-left: 20px;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    text-align: left;
+    float: left; /* add this to make it fit next to the image */
+    color: white;
+    padding-left: 20px;
+    font-size: 25px;
 }
 
 #bar-details-image img {
@@ -41,11 +42,12 @@
 #bar-details-text .bar-name-profile {
   font-weight: 800;
   letter-spacing: 10px;
-  font-size: 30px;
+  font-size: 40px;
 }
 #bar-details-text .bar-address-profile {
-  font-weight: 600;
-  letter-spacing: 5px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    font-size: 35px;
 }
 
 @media only screen and (max-width: 400px) {
@@ -59,7 +61,7 @@
   #bar-details {
     height: fit-content;
   }
-  #bar-details-text {
-    width: 100%;
-  }
+    #bar-details-text {
+        width: 100%;
+    }
 }

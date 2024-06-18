@@ -57,7 +57,7 @@ public class BarController {
         return ResponseEntity.ok("Bar added successfully");
     }
 
-    @GetMapping("{barId}/user/{userId}")
+    @GetMapping("/{barId}/user/{userId}")
     public ResponseEntity<BarDetailsResponse> getBarVisitedByUserDetails(@PathVariable int barId, @PathVariable int userId) {
         return ResponseEntity.ok(visitService.getBarVisitedByDetails(barId, userId));
     }

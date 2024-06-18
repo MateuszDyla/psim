@@ -18,7 +18,8 @@ import BarDetailsPage from './pages/BarDetailsPage.jsx'
 
 const PrivateRoute = ({ element }) => {
     const token = localStorage.getItem('token');
-    return token ? element : <Navigate to="/" />;
+    const userId = localStorage.getItem('userId');
+    return token && userId ? element : <Navigate to="/" />;
 };
 
 const router = createBrowserRouter([

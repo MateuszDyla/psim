@@ -10,7 +10,7 @@
     left: 20px;
     position: relative;
     display: block;
-    top: -30%;
+    top: -20%;
     
 }
 
@@ -19,12 +19,12 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
-    left: 140px;
+    left: 50%;
     position: relative;
     display: flex;
-    top: 20%;
+    top: 33%;
     text-align: left;
-    font-size: 22px;
+    font-size: 35px;
 }
 
 .bar-date {

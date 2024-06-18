@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import io.jsonwebtoken.Claims;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -55,15 +56,37 @@ public class UserController {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
-        long expMillis = nowMillis + 3600000; // 1 hour
+        long expMillis = nowMillis + 3600000;
         Date exp = new Date(expMillis);
+
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            throw new RuntimeException("User not found: " + username);
+        }
 
         return Jwts.builder()
                 .setSubject(username)
+                .claim("userId", user.getId())
                 .setIssuedAt(now)
                 .setExpiration(exp)
                 .signWith(SECRET_KEY)
                 .compact();
+    }
+
+    @GetMapping("/getUserId")
+    public ResponseEntity<Integer> getUserId(@RequestHeader("Authorization") String token) {
+        try {
+            String tokenWithoutBearer = token.replace("Bearer ", "");
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
+                    .build()
+                    .parseClaimsJws(tokenWithoutBearer)
+                    .getBody();
+            return ResponseEntity.ok((Integer) claims.get("userId"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @GetMapping("/{userId}/unlocked")

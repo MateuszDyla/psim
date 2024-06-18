@@ -11,11 +11,10 @@ public class BarDetailsResponse {
     int visitsByUser;
     LocalDateTime lastVisit;
 
-    public BarDetailsResponse(Bar bar, int allVisits, int visitsByUser, LocalDateTime lastVisit) {
+    public BarDetailsResponse(Bar bar, int allVisits, int visitsByUser) {
         this.bar = bar;
         this.allVisits = allVisits;
         this.visitsByUser = visitsByUser;
-        this.lastVisit = lastVisit;
     }
 
     public Bar getBar() {

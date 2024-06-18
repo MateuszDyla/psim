@@ -1,12 +1,8 @@
-//Author: Mateusz Dyla
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DarkButton } from "../Components/DarkButton.jsx";
 import Logo from "../Components/Logo.jsx";
 import '../styles/LoginPageStyle.css';
-
-
 function LoginPage() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -24,15 +20,29 @@ function LoginPage() {
             });
 
             if (response.ok) {
-                const data = await response.text();
-                localStorage.setItem('token', data);
-                navigate('/main');
+                const token = await response.text();
+                localStorage.setItem('token', token);
+
+                const userIdResponse = await fetch('http://localhost:8080/user/getUserId', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (userIdResponse.ok) {
+                    const userId = await userIdResponse.json();
+                    localStorage.setItem('userId', userId);
+                    navigate('/main');
+                } else {
+                    setError('Failed to fetch user ID');
+                }
             } else {
                 const errorData = await response.text();
-                setError(errorData || 'Nieudane logowanie');
+                setError(errorData || 'Login failed');
             }
         } catch (error) {
-            setError(`Błąd sieci: nie udało się połączyć z serwerem (${error.message})`);
+            setError(`Network error: failed to connect to the server (${error.message})`);
         }
     };
 

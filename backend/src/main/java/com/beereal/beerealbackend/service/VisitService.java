@@ -15,5 +15,5 @@ public interface VisitService {
     int countVisitsInBar(int barId);
     BarDetailsResponse getBarVisitedByDetails(int barId, int userId);
 
-    LocalDateTime getLastVisitDate(int barId, int userId);
+    //LocalDateTime getLastVisitDate(int barId, int userId);
 }

@@ -10,6 +10,8 @@ function BarDetailsPage() {
     const location = useLocation();
     const queryParameters = new URLSearchParams(location.search);
     const id = queryParameters.get("id");
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
 
     const [barInfo, setBarInfo] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -22,10 +24,14 @@ function BarDetailsPage() {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:8080/bars/${id}/user/5`)
+        fetch(`http://localhost:8080/bars/${id}/user/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
             })
@@ -33,11 +39,12 @@ function BarDetailsPage() {
                 setBarInfo(data);
                 setLoading(false);
             })
-            .catch((err) => {
-                setError(err.message);
+            .catch((error) => {
+                console.error('Error fetching bar details:', error);
+                setError(error.message);
                 setLoading(false);
             });
-    }, [id]);
+    }, [id, userId, token]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -66,11 +73,7 @@ function BarDetailsPage() {
                     <p className="bar-address-profile">{barInfo.bar.address}</p>
                     <span>Łącznie odwiedzony {barInfo.allVisits} razy</span>
                     <br />
-                    <span>Odwiedzony przez Ciebie {barInfo.visitsByUser}</span>
-                    <br />
-                    <span>
-                        Ostatni raz {new Date(barInfo.lastVisit).toLocaleString()}
-                    </span>
+                    <span>Odwiedzony przez Ciebie {barInfo.visitsByUser} razy</span>
                     <br />
                 </div>
             </div>

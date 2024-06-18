@@ -11,5 +11,5 @@ public interface UserService {
     public User getUserByID(int id);
     boolean authenticateUser(String username, String password);
     List<User> getAll();
-
+    User findByUsername(String username);
 }

@@ -9,13 +9,19 @@ import { useNavigate } from "react-router-dom";
 
 function GamePage() {
     const [records, setRecords] = useState(null);
-    const [scanMode, setScanMode] = useState(0); // Przenieś scanMode do stanu
+    const [scanMode, setScanMode] = useState(0); 
     const width = window.innerWidth;
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         async function fetchBar() {
             try {
-                const response = await fetch("http://localhost:8080/bars/getRandom");
+                const token = localStorage.getItem('token');
+                const response = await fetch("http://localhost:8080/bars/getRandom", {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 const data = await response.json();
                 setRecords(data);
             } catch (err) {
@@ -29,6 +35,7 @@ function GamePage() {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("userId");
         navigate("/");
     };
 

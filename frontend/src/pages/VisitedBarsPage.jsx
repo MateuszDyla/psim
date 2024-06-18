@@ -9,11 +9,12 @@ import "../styles/VisitedBarsPageStyle.css";
 function VisitedBarsPage() {
     const navigate = useNavigate();
     const [records, setRecords] = useState([]);
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const token = localStorage.getItem('token');
 
-        fetch("http://localhost:8080/user/unlocked", {
+        fetch(`http://localhost:8080/user/${userId}/unlocked`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -25,6 +26,7 @@ function VisitedBarsPage() {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
         navigate('/');
     };
 
@@ -41,7 +43,6 @@ function VisitedBarsPage() {
                         barImg={record.imageUrl}
                         barName={record.name}
                         barId={record.id}
-                        date="24.02.2022"
                     />
                 ))}
             </div>

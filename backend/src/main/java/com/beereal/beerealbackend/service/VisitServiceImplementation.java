@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -54,20 +53,14 @@ public class VisitServiceImplementation implements VisitService {
     public BarDetailsResponse getBarVisitedByDetails(int barId, int userId) {
         int visitsByUser = countVisitsByUser(barId, userId);
         int visits = countVisitsInBar(barId);
-        LocalDateTime lastVisit = getLastVisitDate(barId, userId);
+        //LocalDateTime lastVisit = getLastVisitDate(barId, userId);
         Optional<Bar> optionalBar = barRepository.findById(barId);
         if (!optionalBar.isPresent())
             return null;
         Bar bar = optionalBar.get();
 
-        BarDetailsResponse barDetailsResponse = new BarDetailsResponse(bar, visits, visitsByUser, lastVisit);
+        BarDetailsResponse barDetailsResponse = new BarDetailsResponse(bar, visits, visitsByUser);
         return barDetailsResponse;
     }
-
-    @Override
-    public LocalDateTime getLastVisitDate(int barId, int userId) {
-        return visitRepository.findFirstByBarIdAndUserIdOrderByDateDesc(userId, barId).getDate();
-    }
-
 
 }

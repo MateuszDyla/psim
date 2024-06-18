@@ -6,9 +6,10 @@ import "../styles/ScannerPageStyle.css";
 
 function ScannerPage() {
     const devices = useDevices();
-    const [deviceIndex, setDeviceIndex] = useState(0); // Initialize deviceIndex to 0
+    const [deviceIndex, setDeviceIndex] = useState(0); 
     const navigate = useNavigate();
-    const scannerRef = useRef(null); // Ref to Scanner component
+    const scannerRef = useRef(null);
+    const userId = localStorage.getItem('userId');
 
     const changeDevice = () => {
         if (devices.length <= 1) return;
@@ -19,6 +20,12 @@ function ScannerPage() {
         if (result) {
             console.log("Scanned Result:", result[0].rawValue);
         }
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        navigate('/');
     };
 
     return (
