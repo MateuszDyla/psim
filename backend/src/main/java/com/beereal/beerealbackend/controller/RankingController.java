@@ -21,13 +21,13 @@ public class RankingController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/show")
+    @GetMapping("/")
     public ResponseEntity<List<RankingResponse>> getRanking() {
         List<RankingResponse> list = rankingService.getRanking();
         return ResponseEntity.ok(list);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<String> addEntry(@RequestBody RankingEntryDTO rankingEntryDTO) {
         User user = userService.getUserByID(rankingEntryDTO.getUserID());
         if (user == null)

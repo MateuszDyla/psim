@@ -23,7 +23,7 @@ public class VisitController {
     @Autowired
     private BarService barService;
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<String> addVisit(@RequestBody VisitDTO visitDTO) {
         User user = userService.getUserByID(visitDTO.getUserID());
         if (user == null)

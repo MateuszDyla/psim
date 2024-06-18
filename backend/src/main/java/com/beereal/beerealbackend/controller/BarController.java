@@ -23,7 +23,7 @@ public class BarController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<Bar>> getAllBars() {
         List<Bar> bars = barService.getAllBars();
         return ResponseEntity.ok(bars);
@@ -41,7 +41,7 @@ public class BarController {
         return ResponseEntity.ok(bar.getId());
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<String> addBar(@RequestBody Bar bar) {
         if (bar.getName() == null || bar.getName().isEmpty()) {
             return ResponseEntity.badRequest().body("Bar name is required");
