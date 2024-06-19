@@ -68,7 +68,7 @@ function GamePage() {
         method: "DELETE",
       });
 
-      if (game.visitedBars >= 0) {
+      if (game.visitedBars > 0) {
         console.log(game.visitedBars);
 
         let dateDiff = 0;

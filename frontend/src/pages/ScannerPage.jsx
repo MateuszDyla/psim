@@ -6,6 +6,12 @@ import "../styles/ScannerPageStyle.css";
 import { md5 } from "js-md5";
 
 function ScannerPage() {
+  const width = window.innerWidth;
+
+  if (width > 500) {
+    return <div> z kompem raczej nie będziesz biegał alkoholiku</div>;
+  }
+
   const devices = useDevices();
   const [deviceIndex, setDeviceIndex] = useState(0);
   const [bar, setBar] = useState([]);

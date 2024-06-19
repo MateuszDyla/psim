@@ -59,22 +59,24 @@ function BarDetailsPage() {
     return <div>No bar information to get</div>;
   }
   const addComment = async () => {
-    try {
-      await fetch("http://localhost:8080/comments/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userID: userId,
-          barID: id,
-          date: new Date().toISOString(),
-          text: document.getElementById("textarea").value,
-        }),
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    if (document.getElementById("textarea").value.length > 0)
+      try {
+        await fetch("http://localhost:8080/comments/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userID: userId,
+            barID: id,
+            date: new Date().toISOString(),
+            text: document.getElementById("textarea").value,
+          }),
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    document.getElementById("textarea").value = "";
   };
 
   return (
