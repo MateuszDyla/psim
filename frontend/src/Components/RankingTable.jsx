@@ -17,7 +17,7 @@ export default function DataTable() {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/ranking/show")
+    fetch("http://localhost:8080/ranking/")
       .then((response) => response.json())
       .then((data) => setRecords(data))
       .catch((err) => console.log(err));
