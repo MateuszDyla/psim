@@ -1,4 +1,4 @@
-#Frontend
+# Frontend
 
 #### Requirements:
 - node.js
@@ -12,7 +12,7 @@ Install dependencies before the first run:
 Run the application:
 ``npm run dev``
 
-#Backend
+# Backend
 
 Go to the backend directory
 ``cd backend``
