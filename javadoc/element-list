@@ -1,0 +1,9 @@
+com.beereal.beerealbackend
+com.beereal.beerealbackend.config
+com.beereal.beerealbackend.controller
+com.beereal.beerealbackend.dto
+com.beereal.beerealbackend.JSONresponse
+com.beereal.beerealbackend.misc
+com.beereal.beerealbackend.model
+com.beereal.beerealbackend.repository
+com.beereal.beerealbackend.service
