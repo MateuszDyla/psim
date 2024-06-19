@@ -17,16 +17,30 @@ public class GameServiceImplementation implements GameService {
     @Autowired
     private BarRepository barRepository;
 
+    /**
+     * Dodaje obiekt Game do bazy danych
+     * @param game gra do dodania
+     * @return dodany obiekt Game
+     */
     @Override
     public Game addGame(Game game) {
         return gameRepository.save(game);
     }
 
+    /**
+     * Każdy użytkownik może mieć aktywną (zarejestrowaną w BD) grę, usługa ta pobiera informacje o aktualnej grze
+     * @param userId id użytkownika
+     * @return obiekt Game będący informacją o aktualnej grze danego użytkownika
+     */
     @Override
     public Game findActiveUserGame(int userId) {
         return gameRepository.findGameByUserId(userId);
     }
 
+    /**
+     * Każdy użytkownik może mieć aktywną (zarejestrowaną w BD) grę. Po zakończeniu gry, powiązany z nią rekord jest usuwany.
+     * @param userId id użytkownika, którego gra jest usuwana
+     */
     @Override
     public void deleteUserGame(int userId) {
         Game game = gameRepository.findGameByUserId(userId);

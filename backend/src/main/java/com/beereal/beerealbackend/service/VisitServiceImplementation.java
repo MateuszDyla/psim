@@ -20,11 +20,21 @@ public class VisitServiceImplementation implements VisitService {
     @Autowired
     private BarRepository barRepository;
 
+    /**
+     * Dodaje wizytę do bazy danych wizyt
+     * @param visit dane dodawanego obiekty
+     * @return dodawany obiekt
+     */
     @Override
     public Visit addVisit(Visit visit) {
         return visitRepository.save(visit);
     }
 
+    /**
+     * Zwraca listę odblokowanych barów przez użytkownika o podanym id (odblokowany = przynajmniej 1 wizyta danego użytkownika w danym barze nastąpiła)
+     * @param userId id użytkownika
+     * @return Lista odblokowanych barów
+     */
     @Override
     public List<Bar> getUnlockedBarsByUserId(int userId) {
         ArrayList<Bar> bars = new ArrayList<>();
@@ -35,18 +45,35 @@ public class VisitServiceImplementation implements VisitService {
         return new ArrayList<>(new HashSet<>(bars));
     }
 
+    /**
+     * Liczy wizyty użytkownika o podanym id w barze o podanym id
+     * @param barId id baru
+     * @param userId id użytkownika
+     * @return liczba wizyt użytkownika w podanym barze
+     */
     @Override
     public int countVisitsByUser(int barId, int userId) {
 
         return visitRepository.findByBarIdAndUserId(barId, userId).size();
     }
 
+    /**
+     * Liczy wizyty wszystkich użytkowników w barze o podanym id
+     * @param barId id baru
+     * @return liczba wszystkich wizyt w barze
+     */
     @Override
     public int countVisitsInBar(int barId) {
         return visitRepository.countVisitByBarId(barId);
     }
 
 
+    /**
+     * Zwraca statystyki wizyt użytkownika/wszystkich użytkowników w danym barze
+     * @param barId id baru
+     * @param userId id użytkownika
+     * @return statystyki wizyt
+     */
     @Override
     public BarDetailsResponse getBarVisitedByDetails(int barId, int userId) {
         int visitsByUser = countVisitsByUser(barId, userId);

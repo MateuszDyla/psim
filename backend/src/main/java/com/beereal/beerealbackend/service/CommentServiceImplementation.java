@@ -13,13 +13,19 @@ public class CommentServiceImplementation implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+
+    /**
+     * Dodaje obiekt komentarza do bazy danych z komentarzami
+     * @param comment Obiekt komentarza do dodania
+     * @return Dodany komentarz
+     */
     @Override
     public Comment addComment(Comment comment) {
         return commentRepository.save(comment);
     }
 
     /***
-     *
+     * Pobiera listę wszystkich komentarzów (tekstu) dla podanego baru
      * @param barId id baru
      * @return lista wszystkich komentarzów (wartości tekstowych) dla podanego baru
      */

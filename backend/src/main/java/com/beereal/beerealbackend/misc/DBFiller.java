@@ -33,12 +33,12 @@ public class DBFiller {
     RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
     public void fill() {
-        fillBar();
-        fillUser();
-        fillVisit();
-        fillRanking();
-        fillComments();
-        fillGames();
+//        fillBar();
+//        fillUser();
+//        fillVisit();
+//        fillRanking();
+//        fillComments();
+//        fillGames();
     }
 
     public void fillUser() {

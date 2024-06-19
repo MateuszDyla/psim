@@ -16,22 +16,41 @@ public class BarServiceImplementation implements BarService {
     @Autowired
     private BarRepository barRepository;
 
+    /***
+     * Zwraca listę wszystkich barów w bazie danych
+     * @return Lista wszystkich obiektów Bar
+     */
     @Override
     public List<Bar> getAllBars() {
         return barRepository.findAll();
     }
 
+    /***
+     * Dodaje do bazy danych podany bar
+     * @param bar Obiekt dodawanego baru
+     * @return Dodany bar
+     */
     @Override
     public Bar addBar(Bar bar) {
 
         return barRepository.save(bar);
     }
 
+    /**
+     * Pobiera z bazy danych obiekt Bar o podanym Id
+     * @param id id szukanego baru
+     * @return obiekt Bar
+     */
     @Override
     public Bar getBarByID(int id) {
         Optional<Bar> barOptional = barRepository.findById(id);
         return barOptional.orElse(null);
     }
+
+    /**
+     * Pobiera z bazy danych losowy bar
+     * @return obiekt Bar losowy wybrany z bazy danych
+     */
     @Override
     public Bar getRandomBar() {
         List<Bar> bars = getAllBars();
